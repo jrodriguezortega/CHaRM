@@ -12,7 +12,14 @@
 </div>
  
 ## Abstract   
-Insert final abstract
+Identifying anatomical landmarks in 3D dental models is essential for orthodontic treatment, yet manual placement is labor-intensive and requires expert knowledge. While machine learning methods have been proposed for automatic landmark detection in 3D Intraoral Scans (IOS), none provide a fully end-to-end solution that avoids costly tooth segmentation.
+
+We present CHaRM (Conditioned Heatmap Regression Methodology), the first fully end-to-end deep learning approach for tooth landmark detection in 3D IOS. CHaRM integrates four components: a point cloud encoder, a decoder with a heatmap regression head, a teeth-presence classification head, and the novel CHaR module. The CHaR module leverages teeth-presence information to adapt to missing teeth, improving detection accuracy in complex dental cases. Unlike two-stage workflows that segment teeth before landmarking, CHaRM operates directly on IOS point clouds, reducing complexity, avoiding error propagation, and lowering computational cost. 
+
+We evaluated CHaRM with five point cloud learning backbones on IOSLandmarks-1k, a new dataset of 1,214 annotated 3D dental models. Both the dataset and code will be publicly released  to address the scarcity of open data in orthodontics and foster reproducible research. 
+
+CHaRM with PointMLP, named CHaRNet, achieved the best accuracy and efficiency. Compared to state-of-the-art methods (TSMDL and ALIIOS), CHaRNet reduced mean Euclidean distance error to 0.56 mm on standard dental models and 1.12 mm across all dentition types, while delivering up to 14.8× faster inference on GPU.
+This end-to-end approach streamlines orthodontic workflows, enhances the precision of 3D IOS analysis, and enables efficient computer-assisted treatment planning.
 
 ## Dependencies
 Insert instructions to install necessary software...
