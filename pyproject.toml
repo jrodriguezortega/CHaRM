@@ -17,6 +17,7 @@ dependencies = [
     "plyfile==1.0.3",
     "rich==13.7.1",
     "rootutils==1.0.7",
+    "ruff>=0.12.12",
     "timm==1.0.8",
     "torch==2.7.1",
     "treelib==1.7.0",
