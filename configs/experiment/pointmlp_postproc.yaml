@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - override /model: pointmlp
+  - _self_
+
+model:
+  variant: postproc
+  head_pooling: max

@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - override /model: pointtransformer
+  - _self_
+
+model:
+  variant: charm

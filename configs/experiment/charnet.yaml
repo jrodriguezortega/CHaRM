@@ -1,0 +1,7 @@
+# @package _global_
+# CHaRNet: PointMLP with the CHaR module.
+defaults:
+  - pointmlp_charm
+  - _self_
+
+task_name: charnet

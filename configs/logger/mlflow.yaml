@@ -1,0 +1,7 @@
+mlflow:
+  _target_: lightning.pytorch.loggers.MLFlowLogger
+  experiment_name: charm
+  run_name: ${task_name}
+  tracking_uri: ${oc.env:MLFLOW_TRACKING_URI,'file:./mlruns'}
+  tags: null
+  log_model: false

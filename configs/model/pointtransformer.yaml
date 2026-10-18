@@ -1,0 +1,2 @@
+_target_: charm.models.PointTransformer
+variant: charm

@@ -1,0 +1,2 @@
+_target_: charm.models.PointNet2
+variant: charm

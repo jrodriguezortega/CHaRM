@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - override /model: pointnext
+  - _self_
+
+model:
+  variant: base

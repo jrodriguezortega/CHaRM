@@ -1,0 +1,33 @@
+# Train a landmark network: charm-train experiment=<name> [overrides]
+defaults:
+  - data: ioslandmarks
+  - model: pointmlp
+  - optimizer: adamw
+  - scheduler: cosine
+  - trainer: gpu
+  - callbacks: default
+  - logger: mlflow
+  - paths: default
+  - hydra: default
+  - _self_
+  - experiment: null
+
+task_name: ${hydra:runtime.choices.model}_${model.variant}
+tags: []
+seed: 1234
+
+loss:
+  # Weight of the heatmap term and of the tooth-presence term.
+  weight_seg: 0.001
+  weight_cls: 1.0
+
+# Decode the landmarks of teeth predicted present at their best mesh point
+# (variants with a presence head).
+presence_gate: true
+# Distance threshold (mm) of the precision, recall and F1 metrics.
+threshold_mm: 1.0
+
+# Evaluate the best checkpoint on the test split after training.
+test: true
+# Resume training from this checkpoint.
+ckpt_path: null

@@ -1,0 +1,10 @@
+_target_: charm.data.IOSLandmarksDataModule
+data_dir: ${paths.processed_dir}
+splits_dir: ${paths.dataset_dir}/splits
+sigma: 2.0
+mirror_augmentation: true
+# Scans of each dentition type per training batch (batch size = sum).
+samples_per_dentition_type: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+eval_batch_size: 10
+num_workers: 4
+pin_memory: true
