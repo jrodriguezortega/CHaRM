@@ -6,7 +6,8 @@ millimetres of the annotation. Precision divides the true positives by the
 landmarks predicted on the scan and recall by the landmarks present in the
 ground truth. Counts are pooled per dentition type; macro scores average
 precision and recall over dentition types and take their harmonic mean,
-micro scores pool every landmark. MEDE is the mean Euclidean distance over
+micro scores pool every landmark. Precision is zero when nothing is
+predicted but landmarks are annotated. MEDE is the mean Euclidean distance over
 landmarks present in both prediction and ground truth. Tooth presence is
 scored with F1 = 2TP / (2TP + FP + FN) over teeth.
 """
@@ -85,6 +86,8 @@ def scores_from_counts(counts, tag: str = "1mm") -> dict[str, float]:
     """Precision, recall, F1, MEDE and presence F1 of pooled counts."""
     c = dict(zip(COUNTS, [float(v) for v in counts]))
     precision = _ratio(c["tp"], c["n_pred"])
+    if c["n_pred"] == 0 and c["n_gt"] > 0:
+        precision = 0.0
     recall = _ratio(c["tp"], c["n_gt"])
     teeth = 2 * c["teeth_tp"] + c["teeth_fp"] + c["teeth_fn"]
     return {

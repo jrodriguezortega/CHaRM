@@ -88,7 +88,10 @@ class IOSLandmarksDataModule(L.LightningDataModule):
             persistent_workers=self.hparams.num_workers > 0,
         )
 
-    def _eval_dataloader(self, split: str) -> DataLoader:
+    def eval_dataloader(self, split: str) -> DataLoader:
+        """Loader over every scan of ``split`` (val or test), in order."""
+        if split not in ("val", "test"):
+            raise ValueError(f"Expected split val or test, got {split!r}")
         return DataLoader(
             self._dataset(split),
             batch_size=self.hparams.eval_batch_size,
@@ -98,7 +101,7 @@ class IOSLandmarksDataModule(L.LightningDataModule):
         )
 
     def val_dataloader(self) -> DataLoader:
-        return self._eval_dataloader("val")
+        return self.eval_dataloader("val")
 
     def test_dataloader(self) -> DataLoader:
-        return self._eval_dataloader("test")
+        return self.eval_dataloader("test")

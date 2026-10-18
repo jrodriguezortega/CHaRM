@@ -1,0 +1,19 @@
+# Evaluate a checkpoint: charm-eval ckpt_path=<path.ckpt> [split=val]
+defaults:
+  - data: ioslandmarks
+  - paths: default
+  - hydra: default
+  - _self_
+
+task_name: eval
+ckpt_path: ???
+# val or test.
+split: test
+# auto, cpu, cuda or cuda:<index>.
+device: auto
+# Override the decoding and metric settings stored in the checkpoint.
+presence_gate: null
+threshold_mm: null
+# Write the predicted landmarks of every scan (JSON and FCSV).
+save_predictions: true
+output_dir: ${hydra:runtime.output_dir}
