@@ -90,3 +90,6 @@ ignore = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = [
+    "ignore:The '\\w+_dataloader' does not have many workers",
+]
