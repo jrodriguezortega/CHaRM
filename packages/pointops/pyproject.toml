@@ -1,0 +1,13 @@
+[project]
+name = "charm-pointops"
+version = "1.0.0"
+description = "Point Transformer CUDA kernels: k-nearest neighbours and farthest point sampling"
+requires-python = ">=3.12,<3.13"
+dependencies = ["torch==2.7.1"]
+
+[build-system]
+requires = ["setuptools>=75", "torch==2.7.1"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []

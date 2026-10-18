@@ -27,6 +27,9 @@ dependencies = [
     "vedo==2024.5.2",
 ]
 
+[project.optional-dependencies]
+cuda-ops = ["charm-pointnet2-batch", "charm-pointops"]
+
 [project.scripts]
 charm-preprocess = "charm.cli.preprocess:main"
 charm-train = "charm.cli.train:main"
@@ -40,20 +43,27 @@ dev = [
 ]
 cu126 = ["torch==2.7.1"]
 cpu = ["torch==2.7.1"]
+build = ["setuptools>=75"]
 
 [build-system]
 requires = ["uv_build>=0.8.13,<0.9"]
 build-backend = "uv_build"
 
 [tool.uv]
-default-groups = ["dev", "cu126"]
+default-groups = ["dev", "build", "cu126"]
+no-build-isolation-package = ["charm-pointnet2-batch", "charm-pointops"]
 conflicts = [[{ group = "cpu" }, { group = "cu126" }]]
+
+[tool.uv.workspace]
+members = ["packages/*"]
 
 [tool.uv.sources]
 torch = [
     { index = "pytorch-cpu", group = "cpu" },
     { index = "pytorch-cu126", group = "cu126" },
 ]
+charm-pointnet2-batch = { workspace = true }
+charm-pointops = { workspace = true }
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
