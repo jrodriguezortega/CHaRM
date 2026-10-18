@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "CHaRM: segmentation-free 3D landmark detection on intraoral scans"
 readme = "README.md"
 license = "MIT"
-license-files = ["LICENSE"]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
 authors = [
     { name = "José Rodríguez-Ortega", email = "e.jrodriguez98@go.ugr.es" },
 ]
