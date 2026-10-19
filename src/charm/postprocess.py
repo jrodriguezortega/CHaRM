@@ -46,23 +46,28 @@ def decode_landmarks(
     The placeholder is the last of the N points. With ``presence`` and
     ``presence_gate``, the five landmarks of a tooth are placed on the scan
     (at the best mesh point) when its presence probability reaches
-    ``threshold`` and on the placeholder otherwise. Without gating, each
-    landmark is absent when its heatmap peaks on the placeholder, and a
-    tooth is present when any of its landmarks is on the scan.
+    ``threshold`` and on the placeholder otherwise. Without gating, a tooth
+    is present only when all five of its heatmaps peak on the mesh; if any
+    of the five peaks on the placeholder, the whole tooth is absent and its
+    landmarks are placed there.
     """
-    B, L, N = heatmaps.shape
+    N = heatmaps.shape[-1]
     placeholder = N - 1
     world = to_world(points, centroid, tmaxv)
 
     if presence is not None and presence_gate:
         teeth = presence >= threshold
         on_mesh = teeth.repeat_interleave(LANDMARKS_PER_TOOTH, dim=1)
-        scores, idx = heatmaps[..., :placeholder].max(dim=-1)
+        _, idx = heatmaps[..., :placeholder].max(dim=-1)
     else:
-        scores, idx = heatmaps.max(dim=-1)
-        on_mesh = idx != placeholder
-        teeth = on_mesh.view(B, -1, LANDMARKS_PER_TOOTH).any(dim=-1)
+        _, idx = heatmaps.max(dim=-1)
+        peaked_on_mesh = idx != placeholder
+        teeth = peaked_on_mesh.view(
+            heatmaps.shape[0], -1, LANDMARKS_PER_TOOTH
+        ).all(dim=-1)
+        on_mesh = teeth.repeat_interleave(LANDMARKS_PER_TOOTH, dim=1)
 
     idx = torch.where(on_mesh, idx, torch.full_like(idx, placeholder))
+    scores = heatmaps.gather(-1, idx.unsqueeze(-1)).squeeze(-1)
     coords = torch.gather(world, 1, idx.unsqueeze(-1).expand(-1, -1, 3))
     return DecodedLandmarks(coords, on_mesh, teeth, scores)

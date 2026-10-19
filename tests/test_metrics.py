@@ -96,17 +96,31 @@ def test_decode_with_presence_gate():
     )
 
 
-def test_decode_without_gate():
+def test_decode_without_gate_requires_all_five():
     n = 6
     heatmaps = torch.zeros(1, NUM_LANDMARKS, n)
     heatmaps[..., -1] = 1.0
-    heatmaps[0, 7, 1] = 2.0
     points = torch.rand(1, n, 3)
+    # One landmark of tooth 1 peaks on the mesh, so the tooth is absent and
+    # that landmark is moved to the placeholder.
+    heatmaps[0, 7, 1] = 2.0
     decoded = decode_landmarks(
         heatmaps, points, torch.zeros(1, 3), torch.ones(1)
     )
-    assert decoded.on_mesh.sum() == 1 and decoded.on_mesh[0, 7]
-    assert decoded.teeth.sum() == 1 and decoded.teeth[0, 1]
+    assert decoded.on_mesh.sum() == 0
+    assert decoded.teeth.sum() == 0
+    torch.testing.assert_close(decoded.coords[0, 7], points[0, -1])
+
+    heatmaps[0, 5:10, 1] = 2.0
+    decoded = decode_landmarks(
+        heatmaps, points, torch.zeros(1, 3), torch.ones(1)
+    )
+    assert decoded.teeth[0].tolist() == [False, True] + [False] * 14
+    assert decoded.on_mesh[0, 5:10].all()
+    assert decoded.on_mesh.sum() == LANDMARKS_PER_TOOTH
+    torch.testing.assert_close(
+        decoded.coords[0, 5:10], points[0, 1].expand(5, 3)
+    )
 
 
 def test_loss_weights():

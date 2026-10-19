@@ -61,7 +61,7 @@ Point Transformer, PointNeXt and PointMLP), each in up to three variants:
 
 | Variant | Description |
 | --- | --- |
-| `base` | Heatmap regression only. A landmark is absent when its heatmap peaks on the placeholder. |
+| `base` | Heatmap regression only. A tooth is predicted present when all five of its heatmaps peak on the mesh; otherwise its five landmarks are placed on the placeholder. |
 | `postproc` | Heatmap regression plus a teeth-presence head; the predicted presence filters the landmarks after decoding. |
 | `charm` | CHaRM: the presence probabilities condition the heatmaps inside the network through the CHaR module. |
 

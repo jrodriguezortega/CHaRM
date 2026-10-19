@@ -5,8 +5,9 @@ last of which is the placeholder that represents absent teeth. Depending on
 ``variant`` the network is:
 
 ``base``
-    Heatmap regression only. Absent teeth must be inferred from heatmaps
-    peaking on the placeholder.
+    Heatmap regression only. A tooth is present when all five of its
+    heatmaps peak on the mesh; otherwise its landmarks go to the
+    placeholder.
 ``postproc``
     Heatmap regression plus a tooth-presence head trained jointly. The
     presence is applied to the predicted landmarks after decoding.
