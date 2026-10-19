@@ -134,6 +134,35 @@ augmentation. See `charm-preprocess --help` for the options (dataset and
 output folders, number of points, heatmap standard deviation, seed and
 number of workers).
 
+### A note on the data splits
+
+We are sorry to report a mistake in the splits used for the experiments of
+the paper. IOSLandmarks-1k contains the upper and the lower arch of most
+cases, and the two scans of a case should always be in the same split. In
+the original splits they were not: for 67 of the 783 cases, the upper and
+lower arches were assigned to different splits, so part of the information
+about those cases was seen during training and again during validation or
+testing. We apologize for this oversight and thank you for your
+understanding.
+
+The splits published with the dataset, and used by this repository, fix the
+problem. Every case is assigned as a whole to a single split, and the
+number of scans of each dentition type in each split is the same as in the
+original splits (850 / 182 / 182 scans). Among all assignments meeting
+these conditions, we chose the one that moves the fewest scans, which moves
+one scan of each of the 67 affected cases.
+
+Because the splits changed, the numbers you obtain with this code may
+differ from those reported in the paper. We expect the difference to be
+small, and the conclusions of the paper to hold. Only 67 of the 1,214
+scans change split, about 5.5%, and the split sizes and the number of
+scans of each dentition type stay the same. For each affected case only
+one arch moves, so what the model could see ahead of time was the other
+arch of the same patient, a different scan, and never the evaluated scan
+itself. The comparisons in the paper are between methods trained and
+tested on one common split, so a small change in which scans sit where
+moves every method together.
+
 ## Training
 
 Training is configured with [Hydra](https://hydra.cc/); the configuration
