@@ -126,10 +126,13 @@ Then build the training samples:
 uv run charm-preprocess
 ```
 
-This writes one `.npz` file per scan to `data/processed/points_10001`
-(about 0.5 GB). Training scans also get an x-mirrored copy, used as data
+This writes one `.npz` file per scan to `data/processed/sigma2_points_10001`
+(6.7 GB). Each file holds the subsampled points, their normals, the
+landmarks and the Gaussian heatmap target of every landmark (standard
+deviation 2 mm). Training scans also get an x-mirrored copy, used as data
 augmentation. See `charm-preprocess --help` for the options (dataset and
-output folders, number of points, seed and number of workers).
+output folders, number of points, heatmap standard deviation, seed and
+number of workers).
 
 ## Training
 
@@ -157,8 +160,9 @@ on the test split at the end of training (disable with `test=false`).
 Any configuration value can be overridden from the command line:
 
 ```bash
-# Heatmap standard deviation (mm) and weight of the heatmap loss.
-uv run charm-train experiment=charnet data.sigma=1.0 loss.weight_seg=0.01
+# Heatmaps of standard deviation 1 mm, then a different heatmap loss weight.
+uv run charm-preprocess --sigma 1
+uv run charm-train experiment=charnet paths.processed_dir=data/processed/sigma1_points_10001 loss.weight_seg=0.01
 
 # Train on the CPU, or resume an interrupted run.
 uv run charm-train experiment=pointnet2_charm trainer=cpu
@@ -178,7 +182,7 @@ training to the new folder (PointMLP also needs the number of points):
 
 ```bash
 uv run charm-preprocess --num-points 16385
-uv run charm-train experiment=charnet paths.processed_dir=data/processed/points_16385 model.points=16385
+uv run charm-train experiment=charnet paths.processed_dir=data/processed/sigma2_points_16385 model.points=16385
 ```
 
 ### Experiment tracking

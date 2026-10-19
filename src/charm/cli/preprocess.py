@@ -15,6 +15,7 @@ from charm.data.dataset import read_split
 from charm.data.preprocess import (
     NUM_POINTS,
     SEED,
+    SIGMA,
     build_sample,
     sample_path,
 )
@@ -24,8 +25,8 @@ logger = logging.getLogger("charm-preprocess")
 SPLITS = ("train", "val", "test")
 
 
-def default_output_dir(num_points: int) -> Path:
-    return Path("data/processed") / f"points_{num_points}"
+def default_output_dir(num_points: int, sigma: float) -> Path:
+    return Path("data/processed") / f"sigma{sigma:g}_points_{num_points}"
 
 
 def process_one(
@@ -35,6 +36,7 @@ def process_one(
     mirror: bool,
     num_points: int,
     seed: int,
+    sigma: float,
 ) -> Path:
     sample = build_sample(
         dataset_dir / "meshes" / f"{scan_id}.vtp",
@@ -42,6 +44,7 @@ def process_one(
         mirror=mirror,
         num_points=num_points,
         seed=seed,
+        sigma=sigma,
     )
     destination = sample_path(output_dir, scan_id, mirror)
     temporary = destination.with_suffix(".tmp.npz")
@@ -55,7 +58,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         prog="charm-preprocess",
         description=(
             "Subsample the IOSLandmarks-1k meshes and store them with their "
-            "landmarks. Training scans also get an x-mirrored copy."
+            "landmarks and heatmap targets. Training scans also get an "
+            "x-mirrored copy."
         ),
     )
     parser.add_argument(
@@ -68,7 +72,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--output-dir",
         type=Path,
         default=None,
-        help="Output directory (default: data/processed/points_<points>).",
+        help=(
+            "Output directory "
+            "(default: data/processed/sigma<sigma>_points_<points>)."
+        ),
+    )
+    parser.add_argument(
+        "--sigma",
+        type=float,
+        default=SIGMA,
+        help="Standard deviation of the heatmap targets, in millimetres "
+        "(default: %(default)s).",
     )
     parser.add_argument(
         "--num-points",
@@ -100,7 +114,9 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     args = parse_args(argv)
     dataset_dir = args.dataset_dir.expanduser()
-    output_dir = args.output_dir or default_output_dir(args.num_points)
+    output_dir = args.output_dir or default_output_dir(
+        args.num_points, args.sigma
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
 
     jobs = []
@@ -124,7 +140,7 @@ def main(argv: list[str] | None = None) -> int:
                     jobs.append((scan_id, mirror))
 
     logger.info("Writing %d samples to %s", len(jobs), output_dir)
-    common = (args.num_points, args.seed)
+    common = (args.num_points, args.seed, args.sigma)
     failures = 0
     with ProcessPoolExecutor(max_workers=max(1, args.workers)) as pool:
         futures = {

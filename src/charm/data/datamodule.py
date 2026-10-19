@@ -17,16 +17,14 @@ class IOSLandmarksDataModule(L.LightningDataModule):
 
     Training batches hold ``samples_per_dentition_type[t]`` samples of each
     dentition type ``t`` (ordered as ``DENTITION_TYPES``), so the batch size
-    is their sum. Heatmap targets have a standard deviation of ``sigma``
-    millimetres. Validation and test use every scan once, without mirrored
-    copies.
+    is their sum. Validation and test use every scan once, without mirrored
+    copies. Heatmap targets are the ones stored by ``charm-preprocess``.
     """
 
     def __init__(
         self,
-        data_dir: str = "data/processed/points_10001",
+        data_dir: str = "data/processed/sigma2_points_10001",
         splits_dir: str = "data/IOSLandmarks-1k/splits",
-        sigma: float = 2.0,
         mirror_augmentation: bool = True,
         samples_per_dentition_type: list[int] | None = None,
         eval_batch_size: int = 10,
@@ -59,7 +57,6 @@ class IOSLandmarksDataModule(L.LightningDataModule):
                 mirror_augmentation=(
                     split == "train" and self.hparams.mirror_augmentation
                 ),
-                sigma=self.hparams.sigma,
             )
         return self.datasets[split]
 

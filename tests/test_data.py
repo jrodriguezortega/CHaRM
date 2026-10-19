@@ -51,6 +51,9 @@ def test_build_sample(scan):
     landmarks = sample["original_landmarks"]
     np.testing.assert_allclose(landmarks[0], placeholder, rtol=1e-6)
     np.testing.assert_allclose(landmarks[on_mesh], coords[on_mesh], rtol=1e-6)
+    assert sample["heatmaps"].shape == (NUM_POINTS, NUM_LANDMARKS)
+    assert sample["heatmaps"].dtype == np.float32
+    assert float(sample["sigma"]) == 2.0
 
     again = build_sample(mesh_path, json_path, num_points=NUM_POINTS)
     np.testing.assert_array_equal(

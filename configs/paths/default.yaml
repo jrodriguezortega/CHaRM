@@ -1,6 +1,6 @@
 # Relative paths are resolved from the directory charm-train is run in.
 data_dir: data
 dataset_dir: ${paths.data_dir}/IOSLandmarks-1k
-processed_dir: ${paths.data_dir}/processed/points_10001
+processed_dir: ${paths.data_dir}/processed/sigma2_points_10001
 log_dir: outputs
 output_dir: ${hydra:runtime.output_dir}

@@ -9,7 +9,6 @@ import torch
 from torch.utils.data import Dataset
 
 from charm.constants import DENTITION_TYPES, dentition_type
-from charm.data.preprocess import SIGMA, gaussian_heatmaps
 
 
 def read_split(path: str | Path) -> list[str]:
@@ -22,11 +21,10 @@ class IOSLandmarksDataset(Dataset):
     """Samples written by ``charm-preprocess``.
 
     Each item is a dictionary with the normalized ``points`` and ``normals``
-    (N x 3), the ``heatmaps`` target (N x 80) of standard deviation
-    ``sigma`` millimetres, the tooth ``presence`` (16),
-    the ground-truth ``landmarks`` in millimetres (80 x 3), the
-    normalization parameters ``centroid`` and ``tmaxv``, the ``scan_id`` and
-    the index of its ``dentition`` type.
+    (N x 3), the precomputed ``heatmaps`` target (N x 80), the tooth
+    ``presence`` (16), the ground-truth ``landmarks`` in millimetres
+    (80 x 3), the normalization parameters ``centroid`` and ``tmaxv``, the
+    ``scan_id`` and the index of its ``dentition`` type.
     """
 
     def __init__(
@@ -34,10 +32,8 @@ class IOSLandmarksDataset(Dataset):
         data_dir: str | Path,
         scan_ids: list[str],
         mirror_augmentation: bool = False,
-        sigma: float = SIGMA,
     ):
         self.data_dir = Path(data_dir)
-        self.sigma = sigma
         self.items = []
         for scan_id in scan_ids:
             self.items.append((scan_id, f"{scan_id}.npz"))
@@ -65,24 +61,18 @@ class IOSLandmarksDataset(Dataset):
         scan_id, name = self.items[index]
         with np.load(self.data_dir / name) as data:
             sample = {key: data[key] for key in data.files}
-        tmaxv = float(sample["tmaxv"])
-        heatmaps = gaussian_heatmaps(
-            sample["teeth_points"].astype(np.float64) * tmaxv,
-            sample["original_landmarks"].astype(np.float64)
-            - sample["centroid"].astype(np.float64),
-            sample["class_labels"],
-            self.sigma,
-        )
+        if "heatmaps" not in sample:
+            raise KeyError(f"{name} has no heatmaps. Re-run charm-preprocess.")
         return {
             "points": torch.from_numpy(sample["teeth_points"]),
             "normals": torch.from_numpy(sample["teeth_normals"]),
-            "heatmaps": torch.from_numpy(heatmaps.astype(np.float32)),
+            "heatmaps": torch.from_numpy(sample["heatmaps"]),
             "presence": torch.from_numpy(
                 sample["class_labels"].astype(np.float32)
             ),
             "landmarks": torch.from_numpy(sample["original_landmarks"]),
             "centroid": torch.from_numpy(sample["centroid"]),
-            "tmaxv": torch.tensor(tmaxv),
+            "tmaxv": torch.tensor(float(sample["tmaxv"])),
             "scan_id": Path(name).stem,
             "dentition": self.dentition_index(index),
         }

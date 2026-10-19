@@ -5,7 +5,7 @@ centroid of the full mesh and scaled by the largest extent of the subsample
 (``tmaxv``). A placeholder point is appended at ``(0, 0.5, 0)`` in normalized
 coordinates and receives the landmarks of absent teeth. The training target
 of every landmark is a Gaussian heatmap over the points, computed in
-millimetres by ``gaussian_heatmaps`` when the sample is loaded.
+millimetres by ``gaussian_heatmaps`` and stored with the sample.
 """
 
 from __future__ import annotations
@@ -178,6 +178,7 @@ def build_sample(
     mirror: bool = False,
     num_points: int = NUM_POINTS,
     seed: int = SEED,
+    sigma: float = SIGMA,
 ) -> dict[str, np.ndarray]:
     """Build the sample of one scan, optionally mirrored in x."""
     scan_id = Path(mesh_path).stem
@@ -195,13 +196,25 @@ def build_sample(
         landmarks = landmarks[mirror_order()]
         presence = presence[::-1].copy()
 
+    points = cloud.points.astype(np.float32)
+    centroid = cloud.centroid.astype(np.float32)
+    tmaxv = np.float32(cloud.tmaxv)
+    landmarks = landmarks.astype(np.float32)
+    heatmaps = gaussian_heatmaps(
+        points.astype(np.float64) * float(tmaxv),
+        landmarks.astype(np.float64) - centroid.astype(np.float64),
+        presence,
+        sigma,
+    )
     return {
-        "teeth_points": cloud.points.astype(np.float32),
+        "teeth_points": points,
         "teeth_normals": cloud.normals.astype(np.float32),
-        "centroid": cloud.centroid.astype(np.float32),
-        "tmaxv": np.float32(cloud.tmaxv),
-        "original_landmarks": landmarks.astype(np.float32),
+        "centroid": centroid,
+        "tmaxv": tmaxv,
+        "original_landmarks": landmarks,
         "class_labels": presence,
+        "heatmaps": heatmaps.astype(np.float32),
+        "sigma": np.float32(sigma),
     }
 
 
