@@ -1,4 +1,4 @@
-"""``charm-preprocess``: build the training samples of IOSLandmarks-1k."""
+"""Build the training samples of IOSLandmarks-1k."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from charm.data.preprocess import (
     sample_path,
 )
 
-logger = logging.getLogger("charm-preprocess")
+logger = logging.getLogger("preprocess")
 
 SPLITS = ("train", "val", "test")
 
@@ -55,7 +55,7 @@ def process_one(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="charm-preprocess",
+        prog="scripts/preprocess.py",
         description=(
             "Subsample the IOSLandmarks-1k meshes and store them with their "
             "landmarks and heatmap targets. Training scans also get an "

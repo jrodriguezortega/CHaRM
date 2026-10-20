@@ -31,12 +31,6 @@ dependencies = [
 [project.optional-dependencies]
 cuda-ops = ["charm-pointnet2-batch", "charm-pointops"]
 
-[project.scripts]
-charm-preprocess = "charm.cli.preprocess:main"
-charm-train = "charm.cli.train:main"
-charm-eval = "charm.cli.evaluate:main"
-charm-predict = "charm.cli.predict:main"
-
 [dependency-groups]
 dev = [
     "pytest>=8.3",

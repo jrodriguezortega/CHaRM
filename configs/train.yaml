@@ -1,4 +1,5 @@
-# Train a landmark network: charm-train experiment=<name> [overrides]
+# Train a landmark network:
+# python scripts/train.py experiment=<name> [overrides]
 defaults:
   - data: ioslandmarks
   - model: pointmlp

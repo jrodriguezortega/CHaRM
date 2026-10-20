@@ -78,9 +78,10 @@ cd CHaRM
 uv sync
 ```
 
-This installs the `charm` package, its command line tools and the
-development tools (pytest, ruff) into `.venv`. Prefix commands with `uv run`
-or activate the environment with `source .venv/bin/activate`.
+This installs the `charm` package and the development tools (pytest, ruff)
+into `.venv`. The four tools are ordinary scripts. Run them with `uv run
+python scripts/preprocess.py` (and `train.py`, `evaluate.py`, `predict.py`),
+or activate the environment and call `python` directly.
 
 For a machine without a GPU, install the CPU build of PyTorch instead:
 
@@ -123,16 +124,16 @@ data/IOSLandmarks-1k/
 Then build the training samples:
 
 ```bash
-uv run charm-preprocess
+uv run python scripts/preprocess.py
 ```
 
 This writes one `.npz` file per scan to `data/processed/sigma2_points_10001`
 (6.7 GB). Each file holds the subsampled points, their normals, the
 landmarks and the Gaussian heatmap target of every landmark (standard
 deviation 2 mm). Training scans also get an x-mirrored copy, used as data
-augmentation. See `charm-preprocess --help` for the options (dataset and
-output folders, number of points, heatmap standard deviation, seed and
-number of workers).
+augmentation. See `python scripts/preprocess.py --help` for the options:
+dataset and output folders, number of points, heatmap standard deviation,
+seed and number of workers.
 
 ### A note on the data splits
 
@@ -178,7 +179,7 @@ configuration in `configs/experiment/`:
 | PointMLP | `pointmlp_base`, `pointmlp_postproc`, `pointmlp_charm` (alias `charnet`) |
 
 ```bash
-uv run charm-train experiment=charnet
+uv run python scripts/train.py experiment=charnet
 ```
 
 Each run writes its configuration, log and checkpoints to
@@ -190,15 +191,15 @@ Any configuration value can be overridden from the command line:
 
 ```bash
 # Heatmaps of standard deviation 1 mm, then a different heatmap loss weight.
-uv run charm-preprocess --sigma 1
-uv run charm-train experiment=charnet paths.processed_dir=data/processed/sigma1_points_10001 loss.weight_seg=0.01
+uv run python scripts/preprocess.py --sigma 1
+uv run python scripts/train.py experiment=charnet paths.processed_dir=data/processed/sigma1_points_10001 loss.weight_seg=0.01
 
 # Train on the CPU, or resume an interrupted run.
-uv run charm-train experiment=pointnet2_charm trainer=cpu
-uv run charm-train experiment=charnet ckpt_path=outputs/charnet/<run>/checkpoints/last.ckpt
+uv run python scripts/train.py experiment=pointnet2_charm trainer=cpu
+uv run python scripts/train.py experiment=charnet ckpt_path=outputs/charnet/<run>/checkpoints/last.ckpt
 
 # Sweep several experiments (Hydra multirun).
-uv run charm-train -m experiment=pointmlp_base,pointmlp_postproc,pointmlp_charm
+uv run python scripts/train.py -m experiment=pointmlp_base,pointmlp_postproc,pointmlp_charm
 ```
 
 Training batches contain a fixed number of scans of each dentition type,
@@ -210,8 +211,8 @@ To change the number of points, preprocess the dataset again and point the
 training to the new folder (PointMLP also needs the number of points):
 
 ```bash
-uv run charm-preprocess --num-points 16385
-uv run charm-train experiment=charnet paths.processed_dir=data/processed/sigma2_points_16385 model.points=16385
+uv run python scripts/preprocess.py --num-points 16385
+uv run python scripts/train.py experiment=charnet paths.processed_dir=data/processed/sigma2_points_16385 model.points=16385
 ```
 
 ### Experiment tracking
@@ -229,22 +230,22 @@ To log to an MLflow tracking server instead, set its address:
 
 ```bash
 export MLFLOW_TRACKING_URI=http://<host>:5000
-uv run charm-train experiment=charnet
+uv run python scripts/train.py experiment=charnet
 ```
 
 CSV and TensorBoard loggers are also available, alone or combined:
 
 ```bash
-uv run charm-train experiment=charnet logger=csv
-uv run charm-train experiment=charnet logger=tensorboard
-uv run charm-train experiment=charnet "logger=[mlflow,tensorboard]"
+uv run python scripts/train.py experiment=charnet logger=csv
+uv run python scripts/train.py experiment=charnet logger=tensorboard
+uv run python scripts/train.py experiment=charnet "logger=[mlflow,tensorboard]"
 uv run tensorboard --logdir outputs
 ```
 
 ## Evaluation
 
 ```bash
-uv run charm-eval ckpt_path=outputs/charnet/<run>/checkpoints/<best>.ckpt
+uv run python scripts/evaluate.py ckpt_path=outputs/charnet/<run>/checkpoints/<best>.ckpt
 ```
 
 The checkpoint is scored on the test split (`split=val` for validation) with
@@ -274,10 +275,10 @@ heatmap instead of from the predicted teeth presence.
 ## Inference on new scans
 
 ```bash
-uv run charm-predict <checkpoint.ckpt> scan_upper.stl scans/ -o predictions
+uv run python scripts/predict.py <checkpoint.ckpt> scan_upper.stl scans/ -o predictions
 ```
 
-`charm-predict` reads `.vtp`, `.stl`, `.ply` and `.obj` meshes, given as
+`scripts/predict.py` reads `.vtp`, `.stl`, `.ply` and `.obj` meshes, given as
 files or folders, with coordinates in millimetres. The arch is read from
 the `_upper` or `_lower` suffix of the file name; pass `--arch upper` or
 `--arch lower` otherwise. For each scan it writes:
@@ -298,8 +299,9 @@ mean and standard deviation.
 ```
 configs/                 Hydra configurations (train.yaml, eval.yaml and groups)
 packages/                Optional CUDA operators (cuda-ops extra)
+scripts/                 preprocess.py, train.py, evaluate.py, predict.py
 src/charm/
-├── cli/                 charm-preprocess, charm-train, charm-eval, charm-predict
+├── cli/                 Implementation of the four scripts
 ├── data/                Preprocessing, dataset and dentition-balanced datamodule
 ├── models/              Backbones, CHaR module and point operators
 ├── lit_module.py        Lightning module

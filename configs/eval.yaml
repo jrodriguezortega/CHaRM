@@ -1,4 +1,5 @@
-# Evaluate a checkpoint: charm-eval ckpt_path=<path.ckpt> [split=val]
+# Evaluate a checkpoint:
+# python scripts/evaluate.py ckpt_path=<path.ckpt> [split=val]
 defaults:
   - data: ioslandmarks
   - paths: default

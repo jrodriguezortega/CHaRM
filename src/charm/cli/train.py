@@ -1,4 +1,4 @@
-"""``charm-train``: train a landmark network with Hydra configs."""
+"""Train a landmark network with the Hydra configs in ``configs/``."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from omegaconf import DictConfig, OmegaConf
 from charm.cli.common import config_dir
 from charm.lit_module import CHaRMModule
 
-log = logging.getLogger("charm-train")
+log = logging.getLogger("train")
 
 
 def train(cfg: DictConfig) -> dict[str, float]:

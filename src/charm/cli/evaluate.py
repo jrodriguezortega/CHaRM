@@ -1,4 +1,4 @@
-"""``charm-eval``: score a checkpoint on the validation or test split."""
+"""Score a checkpoint on the validation or test split."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from charm.metrics import (
 )
 from charm.postprocess import decode_landmarks
 
-log = logging.getLogger("charm-eval")
+log = logging.getLogger("evaluate")
 
 
 def _clean(value: float) -> float | None:

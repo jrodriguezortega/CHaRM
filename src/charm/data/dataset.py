@@ -18,7 +18,7 @@ def read_split(path: str | Path) -> list[str]:
 
 
 class IOSLandmarksDataset(Dataset):
-    """Samples written by ``charm-preprocess``.
+    """Samples written by ``scripts/preprocess.py``.
 
     Each item is a dictionary with the normalized ``points`` and ``normals``
     (N x 3), the precomputed ``heatmaps`` target (N x 80), the tooth
@@ -47,7 +47,7 @@ class IOSLandmarksDataset(Dataset):
         if missing:
             raise FileNotFoundError(
                 f"{len(missing)} samples missing in {self.data_dir}, e.g. "
-                f"{missing[0]}. Run charm-preprocess first."
+                f"{missing[0]}. Run python scripts/preprocess.py first."
             )
 
     def __len__(self) -> int:
@@ -62,7 +62,9 @@ class IOSLandmarksDataset(Dataset):
         with np.load(self.data_dir / name) as data:
             sample = {key: data[key] for key in data.files}
         if "heatmaps" not in sample:
-            raise KeyError(f"{name} has no heatmaps. Re-run charm-preprocess.")
+            raise KeyError(
+                f"{name} has no heatmaps. Re-run python scripts/preprocess.py."
+            )
         return {
             "points": torch.from_numpy(sample["teeth_points"]),
             "normals": torch.from_numpy(sample["teeth_normals"]),

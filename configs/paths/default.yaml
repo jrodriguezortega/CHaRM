@@ -1,4 +1,4 @@
-# Relative paths are resolved from the directory charm-train is run in.
+# Relative paths are resolved from the directory scripts/train.py is run in.
 data_dir: data
 dataset_dir: ${paths.data_dir}/IOSLandmarks-1k
 processed_dir: ${paths.data_dir}/processed/sigma2_points_10001

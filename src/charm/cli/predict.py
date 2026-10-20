@@ -1,4 +1,4 @@
-"""``charm-predict``: detect the landmarks of new intraoral scans."""
+"""Detect the landmarks of new intraoral scans."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ from charm.data.preprocess import (
 from charm.io import write_fcsv, write_json
 from charm.postprocess import decode_landmarks
 
-log = logging.getLogger("charm-predict")
+log = logging.getLogger("predict")
 
 MESH_SUFFIXES = (".vtp", ".stl", ".ply", ".obj")
 
@@ -156,7 +156,7 @@ def benchmark(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="charm-predict",
+        prog="scripts/predict.py",
         description=(
             "Detect the 80 landmarks of intraoral scans and write them as "
             "JSON (IOSLandmarks-1k format) and FCSV (3D Slicer). Landmarks "

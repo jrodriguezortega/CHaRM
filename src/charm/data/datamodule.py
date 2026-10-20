@@ -18,7 +18,7 @@ class IOSLandmarksDataModule(L.LightningDataModule):
     Training batches hold ``samples_per_dentition_type[t]`` samples of each
     dentition type ``t`` (ordered as ``DENTITION_TYPES``), so the batch size
     is their sum. Validation and test use every scan once, without mirrored
-    copies. Heatmap targets are the ones stored by ``charm-preprocess``.
+    copies. Heatmap targets are the ones stored by ``scripts/preprocess.py``.
     """
 
     def __init__(
