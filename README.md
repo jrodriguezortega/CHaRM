@@ -2,13 +2,13 @@
 
 # CHaRM: Segmentation-Free Deep Learning Methodology for Accurate 3D Landmark Detection on Complex Intraoral Scans
 
-![Journal](https://img.shields.io/badge/Expert%20Systems%20with%20Applications-2026-orange.svg)
-![Dataset](https://img.shields.io/badge/Dataset-IOSLandmarks--1k-blue.svg)
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![CI](https://github.com/jrodriguezortega/CHaRM/actions/workflows/ci.yml/badge.svg)
-![PyTorch](https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white)
-![Lightning](https://img.shields.io/badge/-Lightning-792ee5?logo=lightning&logoColor=white)
-![Config: Hydra](https://img.shields.io/badge/Config-Hydra-89b8cd)
+[![Journal](https://img.shields.io/badge/Expert%20Systems%20with%20Applications-2026-orange.svg)](https://doi.org/10.1016/j.eswa.2026.134592)
+[![Dataset](https://img.shields.io/badge/Dataset-IOSLandmarks--1k-blue.svg)](https://doi.org/10.5281/zenodo.14757223)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI](https://github.com/jrodriguezortega/CHaRM/actions/workflows/ci.yml/badge.svg)](https://github.com/jrodriguezortega/CHaRM/actions/workflows/ci.yml)
+[![PyTorch](https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Lightning](https://img.shields.io/badge/-Lightning-792ee5?logo=lightning&logoColor=white)](https://lightning.ai/docs/pytorch/stable/)
+[![Config: Hydra](https://img.shields.io/badge/Config-Hydra-89b8cd)](https://hydra.cc/)
 
 José Rodríguez-Ortega, Francisco Pérez-Hernández, Siham Tabik
 
