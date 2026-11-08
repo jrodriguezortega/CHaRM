@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = "==3.12.*"
 resolution-markers = [
     "sys_platform != 'win32' and extra != 'group-5-charm-cpu' and extra == 'group-5-charm-cu126'",
@@ -179,7 +179,7 @@ name = "cffi"
 version = "2.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser", marker = "implementation_name != 'PyPy' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "pycparser", marker = "implementation_name != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz", hash = "sha256:dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be", size = 530807, upload-time = "2026-08-03T21:21:18.939Z" }
 wheels = [
@@ -201,6 +201,7 @@ wheels = [
 name = "charm"
 version = "1.0.0"
 source = { editable = "." }
+default-groups = ["build", "cu126", "dev"]
 dependencies = [
     { name = "hydra-colorlog" },
     { name = "hydra-core" },
@@ -210,7 +211,7 @@ dependencies = [
     { name = "rich" },
     { name = "tensorboard" },
     { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cu126", source = { registry = "https://download.pytorch.org/whl/cu126" }, marker = "extra == 'group-5-charm-cu126'" },
     { name = "torchmetrics" },
@@ -249,7 +250,7 @@ requires-dist = [
     { name = "mlflow", specifier = ">=2.22,<3" },
     { name = "numpy", specifier = "==1.26.4" },
     { name = "rich", specifier = "==13.7.1" },
-    { name = "tensorboard", specifier = ">=2.17" },
+    { name = "tensorboard", specifier = "==2.17" },
     { name = "torch", specifier = "==2.7.1" },
     { name = "torchmetrics", specifier = "==1.8.2" },
     { name = "vedo", specifier = "==2024.5.2" },
@@ -271,7 +272,7 @@ version = "1.0.0"
 source = { editable = "packages/pointnet2-batch" }
 dependencies = [
     { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cu126", source = { registry = "https://download.pytorch.org/whl/cu126" }, marker = "extra == 'group-5-charm-cu126'" },
 ]
@@ -285,7 +286,7 @@ version = "1.0.0"
 source = { editable = "packages/pointops" }
 dependencies = [
     { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cu126", source = { registry = "https://download.pytorch.org/whl/cu126" }, marker = "extra == 'group-5-charm-cu126'" },
 ]
@@ -318,7 +319,7 @@ name = "click"
 version = "8.2.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/60/6c/8ca2efa64cf75a977a0d7fac081354553ebe483345c734fb6b6515d96bbc/click-8.2.1.tar.gz", hash = "sha256:27c491cc05d968d271d5a1db13e3b5a184636d9d930f148c50b038f0d0646202", size = 286342, upload-time = "2025-05-20T23:19:49.832Z" }
 wheels = [
@@ -348,7 +349,7 @@ name = "colorlog"
 version = "6.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d3/7a/359f4d5df2353f26172b3cc39ea32daa39af8de522205f512f458923e677/colorlog-6.9.0.tar.gz", hash = "sha256:bfba54a1b93b94f54e1f4fe48395725a3d92fd2a4af702f6bd70946bdc0c6ac2", size = 16624, upload-time = "2024-10-29T18:34:51.011Z" }
 wheels = [
@@ -382,7 +383,7 @@ name = "cryptography"
 version = "50.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "platform_python_implementation != 'PyPy' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "cffi", marker = "platform_python_implementation != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9d/af/182eb91b0df3fe75c4d9f26fe70684569566745f6ba7e5c9c73a862c5252/cryptography-50.0.2.tar.gz", hash = "sha256:7b46165bb56eb4704e2eaaf86f3c940d19154535d9b0ca7d6d590b04060e00d5", size = 880623, upload-time = "2026-09-30T15:30:04.884Z" }
 wheels = [
@@ -456,7 +457,7 @@ name = "docker"
 version = "7.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pywin32", marker = "sys_platform == 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "pywin32", marker = "sys_platform == 'win32'" },
     { name = "requests" },
     { name = "urllib3" },
 ]
@@ -647,7 +648,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/44/69/9b804adb5fd0671f367781560eb5eb586c4d495277c93bde4307b9e28068/greenlet-3.2.4-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:3b67ca49f54cede0186854a008109d6ee71f66bd57bb36abd6d0a0267b540cdd", size = 274079, upload-time = "2025-08-07T13:15:45.033Z" },
     { url = "https://files.pythonhosted.org/packages/46/e9/d2a80c99f19a153eff70bc451ab78615583b8dac0754cfb942223d2c1a0d/greenlet-3.2.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:ddf9164e7a5b08e9d22511526865780a576f19ddd00d62f8a665949327fde8bb", size = 640997, upload-time = "2025-08-07T13:42:56.234Z" },
     { url = "https://files.pythonhosted.org/packages/3b/16/035dcfcc48715ccd345f3a93183267167cdd162ad123cd93067d86f27ce4/greenlet-3.2.4-cp312-cp312-manylinux2014_ppc64le.manylinux_2_17_ppc64le.whl", hash = "sha256:f28588772bb5fb869a8eb331374ec06f24a83a9c25bfa1f38b6993afe9c1e968", size = 655185, upload-time = "2025-08-07T13:45:27.624Z" },
-    { url = "https://files.pythonhosted.org/packages/31/da/0386695eef69ffae1ad726881571dfe28b41970173947e7c558d9998de0f/greenlet-3.2.4-cp312-cp312-manylinux2014_s390x.manylinux_2_17_s390x.whl", hash = "sha256:5c9320971821a7cb77cfab8d956fa8e39cd07ca44b6070db358ceb7f8797c8c9", size = 649926, upload-time = "2025-08-07T13:53:15.251Z" },
     { url = "https://files.pythonhosted.org/packages/68/88/69bf19fd4dc19981928ceacbc5fd4bb6bc2215d53199e367832e98d1d8fe/greenlet-3.2.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:c60a6d84229b271d44b70fb6e5fa23781abb5d742af7b808ae3f6efd7c9c60f6", size = 651839, upload-time = "2025-08-07T13:18:30.281Z" },
     { url = "https://files.pythonhosted.org/packages/19/0d/6660d55f7373b2ff8152401a83e02084956da23ae58cddbfb0b330978fe9/greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:3b3812d8d0c9579967815af437d96623f45c0f2ae5f04e366de62a12d83a8fb0", size = 607586, upload-time = "2025-08-07T13:18:28.544Z" },
     { url = "https://files.pythonhosted.org/packages/8e/1a/c953fdedd22d81ee4629afbb38d2f9d71e37d23caace44775a3a969147d4/greenlet-3.2.4-cp312-cp312-musllinux_1_1_aarch64.whl", hash = "sha256:abbf57b5a870d30c4675928c37278493044d7c14378350b3aa5d484fa65575f0", size = 1123281, upload-time = "2025-08-07T13:42:39.858Z" },
@@ -683,7 +683,7 @@ name = "gunicorn"
 version = "21.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "packaging", marker = "sys_platform != 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "packaging" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/06/89/acd9879fa6a5309b4bf16a5a8855f1e58f26d38e0c18ede9b3a70996b021/gunicorn-21.2.0.tar.gz", hash = "sha256:88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033", size = 3632557, upload-time = "2023-07-19T11:46:46.917Z" }
 wheels = [
@@ -818,7 +818,7 @@ dependencies = [
     { name = "pytorch-lightning" },
     { name = "pyyaml" },
     { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cu126", source = { registry = "https://download.pytorch.org/whl/cu126" }, marker = "extra == 'group-5-charm-cu126'" },
     { name = "torchmetrics" },
@@ -939,7 +939,7 @@ dependencies = [
     { name = "docker" },
     { name = "flask" },
     { name = "graphene" },
-    { name = "gunicorn", marker = "sys_platform != 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "gunicorn", marker = "sys_platform != 'win32'" },
     { name = "jinja2" },
     { name = "markdown" },
     { name = "matplotlib" },
@@ -950,7 +950,7 @@ dependencies = [
     { name = "scikit-learn" },
     { name = "scipy" },
     { name = "sqlalchemy" },
-    { name = "waitress", marker = "sys_platform == 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "waitress", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/37/fa/c70189287a11b6ae32323957694d88c8811448b784203287ba7e384a87fc/mlflow-2.22.5.tar.gz", hash = "sha256:687c0fee93d25aee1b9537d0a83951daaa1f83bdf60658495e27992304cdcd51", size = 28378119, upload-time = "2026-05-12T08:50:29.355Z" }
 wheels = [
@@ -1095,7 +1095,7 @@ name = "nvidia-cudnn-cu12"
 version = "9.5.1.17"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "(sys_platform != 'win32' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cublas-cu12", marker = "(sys_platform != 'win32' and extra != 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/99/93/a201a12d3ec1caa8c6ac34c1c2f9eeb696b886f0c36ff23c638b46603bd0/nvidia_cudnn_cu12-9.5.1.17-py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:9fd4584468533c61873e5fda8ca41bac3a38bcb2d12350830c69b0a96a7e4def", size = 570523509, upload-time = "2024-10-25T19:53:03.148Z" },
@@ -1108,7 +1108,7 @@ name = "nvidia-cufft-cu12"
 version = "11.3.0.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "(sys_platform != 'win32' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(sys_platform != 'win32' and extra != 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1f/37/c50d2b2f2c07e146776389e3080f4faf70bcc4fa6e19d65bb54ca174ebc3/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d16079550df460376455cba121db6564089176d9bac9e4f360493ca4741b22a6", size = 200164144, upload-time = "2024-11-20T17:40:58.288Z" },
@@ -1144,9 +1144,9 @@ name = "nvidia-cusolver-cu12"
 version = "11.7.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "(sys_platform != 'win32' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cusparse-cu12", marker = "(sys_platform != 'win32' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-nvjitlink-cu12", marker = "(sys_platform != 'win32' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cublas-cu12", marker = "(sys_platform != 'win32' and extra != 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cusparse-cu12", marker = "(sys_platform != 'win32' and extra != 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(sys_platform != 'win32' and extra != 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/93/17/dbe1aa865e4fdc7b6d4d0dd308fdd5aaab60f939abfc0ea1954eac4fb113/nvidia_cusolver_cu12-11.7.1.2-py3-none-manylinux2014_aarch64.whl", hash = "sha256:0ce237ef60acde1efc457335a2ddadfd7610b892d94efee7b776c64bb1cac9e0", size = 157833628, upload-time = "2024-10-01T17:05:05.591Z" },
@@ -1161,7 +1161,7 @@ name = "nvidia-cusparse-cu12"
 version = "12.5.4.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "(sys_platform != 'win32' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(sys_platform != 'win32' and extra != 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/eb/eb/6681efd0aa7df96b4f8067b3ce7246833dd36830bb4cec8896182773db7d/nvidia_cusparse_cu12-12.5.4.2-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d25b62fb18751758fe3c93a4a08eff08effedfe4edf1c6bb5afd0890fe88f887", size = 216451147, upload-time = "2024-11-20T17:44:18.055Z" },
@@ -1349,17 +1349,16 @@ wheels = [
 
 [[package]]
 name = "protobuf"
-version = "6.33.6"
+version = "4.25.9"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/66/70/e908e9c5e52ef7c3a6c7902c9dfbb34c7e29c25d2f81ade3856445fd5c94/protobuf-6.33.6.tar.gz", hash = "sha256:a6768d25248312c297558af96a9f9c929e8c4cee0659cb07e780731095f38135", size = 444531, upload-time = "2026-03-18T19:05:00.988Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d9/8e/d08c41a8c004e1d437ef467e7c4f9c3295cd784eba48ed5d1d01f94b1dad/protobuf-4.25.9.tar.gz", hash = "sha256:b0dc7e7c68de8b1ce831dacb12fb407e838edbb8b6cc0dc3a2a6b4cbf6de9cff", size = 381040, upload-time = "2026-03-25T23:09:36.423Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fc/9f/2f509339e89cfa6f6a4c4ff50438db9ca488dec341f7e454adad60150b00/protobuf-6.33.6-cp310-abi3-win32.whl", hash = "sha256:7d29d9b65f8afef196f8334e80d6bc1d5d4adedb449971fefd3723824e6e77d3", size = 425739, upload-time = "2026-03-18T19:04:48.373Z" },
-    { url = "https://files.pythonhosted.org/packages/76/5d/683efcd4798e0030c1bab27374fd13a89f7c2515fb1f3123efdfaa5eab57/protobuf-6.33.6-cp310-abi3-win_amd64.whl", hash = "sha256:0cd27b587afca21b7cfa59a74dcbd48a50f0a6400cfb59391340ad729d91d326", size = 437089, upload-time = "2026-03-18T19:04:50.381Z" },
-    { url = "https://files.pythonhosted.org/packages/5c/01/a3c3ed5cd186f39e7880f8303cc51385a198a81469d53d0fdecf1f64d929/protobuf-6.33.6-cp39-abi3-macosx_10_9_universal2.whl", hash = "sha256:9720e6961b251bde64edfdab7d500725a2af5280f3f4c87e57c0208376aa8c3a", size = 427737, upload-time = "2026-03-18T19:04:51.866Z" },
-    { url = "https://files.pythonhosted.org/packages/ee/90/b3c01fdec7d2f627b3a6884243ba328c1217ed2d978def5c12dc50d328a3/protobuf-6.33.6-cp39-abi3-manylinux2014_aarch64.whl", hash = "sha256:e2afbae9b8e1825e3529f88d514754e094278bb95eadc0e199751cdd9a2e82a2", size = 324610, upload-time = "2026-03-18T19:04:53.096Z" },
-    { url = "https://files.pythonhosted.org/packages/9b/ca/25afc144934014700c52e05103c2421997482d561f3101ff352e1292fb81/protobuf-6.33.6-cp39-abi3-manylinux2014_s390x.whl", hash = "sha256:c96c37eec15086b79762ed265d59ab204dabc53056e3443e702d2681f4b39ce3", size = 339381, upload-time = "2026-03-18T19:04:54.616Z" },
-    { url = "https://files.pythonhosted.org/packages/16/92/d1e32e3e0d894fe00b15ce28ad4944ab692713f2e7f0a99787405e43533a/protobuf-6.33.6-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:e9db7e292e0ab79dd108d7f1a94fe31601ce1ee3f7b79e0692043423020b0593", size = 323436, upload-time = "2026-03-18T19:04:55.768Z" },
-    { url = "https://files.pythonhosted.org/packages/c4/72/02445137af02769918a93807b2b7890047c32bfb9f90371cbc12688819eb/protobuf-6.33.6-py3-none-any.whl", hash = "sha256:77179e006c476e69bf8e8ce866640091ec42e1beb80b213c3900006ecfba6901", size = 170656, upload-time = "2026-03-18T19:04:59.826Z" },
+    { url = "https://files.pythonhosted.org/packages/a8/e9/59435bd04bdd46cb38c42a336b22f9843e8e586ff83c35a5423f8b14704e/protobuf-4.25.9-cp310-abi3-win32.whl", hash = "sha256:bde396f568b0b46fc8fbfe9f02facf25b6755b2578a3b8ac61e74b9d69499e03", size = 392879, upload-time = "2026-03-25T23:09:21.32Z" },
+    { url = "https://files.pythonhosted.org/packages/f3/16/42a5c7f1001783d2b5bfcecde10127f09010f78982c86ae409122ce3ece6/protobuf-4.25.9-cp310-abi3-win_amd64.whl", hash = "sha256:3683c05154252206f7cb2d371626514b3708199d9bcf683b503dabf3a2e38e06", size = 413900, upload-time = "2026-03-25T23:09:23.589Z" },
+    { url = "https://files.pythonhosted.org/packages/56/5b/0074a0a9eb01f3d1c4648ca5e81b22090c811b210b61df9018ac6d6c5cda/protobuf-4.25.9-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:9560813560e6ee72c11ca8873878bdb7ee003c96a57ebb013245fe84e2540904", size = 394826, upload-time = "2026-03-25T23:09:25.194Z" },
+    { url = "https://files.pythonhosted.org/packages/54/aa/b2dba856f64c36b2a06c67be1472de98cca07a2322d0f0cbf03279a40e5b/protobuf-4.25.9-cp37-abi3-manylinux2014_aarch64.whl", hash = "sha256:999146ef02e7fa6a692477badd1528bcd7268df211852a3df2d834ba2b480791", size = 294191, upload-time = "2026-03-25T23:09:26.613Z" },
+    { url = "https://files.pythonhosted.org/packages/a8/5c/53f18822017b8bda6bd8bb4e02048e911fdc79a3dafdc83ab994fe922a84/protobuf-4.25.9-cp37-abi3-manylinux2014_x86_64.whl", hash = "sha256:438c636de8fb706a0de94a12a268ef1ae8f5ba5ae655a7671fcda5968ba3c9be", size = 295178, upload-time = "2026-03-25T23:09:27.839Z" },
+    { url = "https://files.pythonhosted.org/packages/16/28/d5065b212685875d3924bcdb3201cbf467cb4d58a18aa19a8dfd99ea80a9/protobuf-4.25.9-py3-none-any.whl", hash = "sha256:d49b615e7c935194ac161f0965699ac84df6112c378e05ec53da65d2e4cbb6d4", size = 156822, upload-time = "2026-03-25T23:09:34.957Z" },
 ]
 
 [[package]]
@@ -1478,7 +1477,7 @@ name = "pytest"
 version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
@@ -1511,7 +1510,7 @@ dependencies = [
     { name = "packaging" },
     { name = "pyyaml" },
     { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cu126", source = { registry = "https://download.pytorch.org/whl/cu126" }, marker = "extra == 'group-5-charm-cu126'" },
     { name = "torchmetrics" },
@@ -1684,7 +1683,7 @@ name = "sqlalchemy"
 version = "2.0.43"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "greenlet", marker = "platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "greenlet", marker = "platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64'" },
     { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d7/bc/d59b5d97d27229b0e009bd9098cd81af71c2fa5549c580a0a67b9bed0496/sqlalchemy-2.0.43.tar.gz", hash = "sha256:788bfcef6787a7764169cfe9859fe425bf44559619e1d9f56f5bddf2ebf6f417", size = 9762949, upload-time = "2025-08-11T14:24:58.438Z" }
@@ -1736,22 +1735,21 @@ wheels = [
 
 [[package]]
 name = "tensorboard"
-version = "2.21.0"
+version = "2.17.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "absl-py" },
     { name = "grpcio" },
     { name = "markdown" },
     { name = "numpy" },
-    { name = "packaging" },
-    { name = "pillow" },
     { name = "protobuf" },
     { name = "setuptools" },
+    { name = "six" },
     { name = "tensorboard-data-server" },
     { name = "werkzeug" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/37/4b/cd2eec9642781a8f5b2fb9994e3933a7b259ab18e9d49aeede9b5acf6311/tensorboard-2.21.0-py3-none-any.whl", hash = "sha256:7279316dcb6bd5bc391d623dea841531299cde1887310e8133bc34a996d32255", size = 5516204, upload-time = "2026-06-29T20:48:04.472Z" },
+    { url = "https://files.pythonhosted.org/packages/0a/32/2e8545fb0592f33e3aca5951e8b01008b76d61b440658cbdc37b4eaebf0b/tensorboard-2.17.0-py3-none-any.whl", hash = "sha256:859a499a9b1fb68a058858964486627100b71fcb21646861c61d31846a6478fb", size = 5502603, upload-time = "2024-06-07T20:41:29.938Z" },
 ]
 
 [[package]]
@@ -1802,13 +1800,28 @@ resolution-markers = [
     "sys_platform == 'win32'",
 ]
 dependencies = [
-    { name = "filelock", marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
-    { name = "fsspec", marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
-    { name = "jinja2", marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
-    { name = "networkx", marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
-    { name = "setuptools", marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
-    { name = "sympy", marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
-    { name = "typing-extensions", marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
+    { name = "filelock", marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "fsspec", marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "jinja2", marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "networkx", marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cublas-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cuda-cupti-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cuda-nvrtc-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cuda-runtime-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cudnn-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cufft-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cufile-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-curand-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cusolver-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cusparse-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cusparselt-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nccl-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nvtx-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "setuptools", marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "sympy", marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "triton", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "typing-extensions", marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/87/93/fb505a5022a2e908d81fe9a5e0aa84c86c0d5f408173be71c6018836f34e/torch-2.7.1-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:27ea1e518df4c9de73af7e8a720770f3628e7f667280bce2be7a16292697e3fa", size = 98948276, upload-time = "2025-06-04T17:39:12.852Z" },
@@ -1854,23 +1867,23 @@ dependencies = [
     { name = "fsspec", marker = "extra == 'group-5-charm-cu126'" },
     { name = "jinja2", marker = "extra == 'group-5-charm-cu126'" },
     { name = "networkx", marker = "extra == 'group-5-charm-cu126'" },
-    { name = "nvidia-cublas-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cuda-cupti-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cuda-nvrtc-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cuda-runtime-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cudnn-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cufft-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cufile-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-curand-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cusolver-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cusparse-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-cusparselt-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-nccl-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "nvidia-nvtx-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cublas-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cuda-cupti-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cuda-nvrtc-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cuda-runtime-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cudnn-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cufft-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cufile-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-curand-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cusolver-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cusparse-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-cusparselt-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nccl-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "nvidia-nvtx-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "setuptools", marker = "extra == 'group-5-charm-cu126'" },
     { name = "sympy", marker = "extra == 'group-5-charm-cu126'" },
-    { name = "triton", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (platform_machine != 'x86_64' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (sys_platform != 'linux' and extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "triton", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "typing-extensions", marker = "extra == 'group-5-charm-cu126'" },
 ]
 wheels = [
@@ -1887,7 +1900,7 @@ dependencies = [
     { name = "numpy" },
     { name = "packaging" },
     { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126') or (extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra != 'group-5-charm-cpu' and extra != 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
     { name = "torch", version = "2.7.1+cu126", source = { registry = "https://download.pytorch.org/whl/cu126" }, marker = "extra == 'group-5-charm-cu126'" },
 ]
@@ -1901,7 +1914,7 @@ name = "tqdm"
 version = "4.67.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737, upload-time = "2024-11-24T20:12:22.481Z" }
 wheels = [
@@ -1913,7 +1926,7 @@ name = "triton"
 version = "3.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "setuptools", marker = "(sys_platform != 'win32' and extra == 'group-5-charm-cu126') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
+    { name = "setuptools", marker = "(sys_platform != 'win32' and extra != 'group-5-charm-cpu') or (extra == 'group-5-charm-cpu' and extra == 'group-5-charm-cu126')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/24/5f/950fb373bf9c01ad4eb5a8cd5eaf32cdf9e238c02f9293557a2129b9c4ac/triton-3.3.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9999e83aba21e1a78c1f36f21bce621b77bcaa530277a50484a7cb4a822f6e43", size = 155669138, upload-time = "2025-05-29T23:39:51.771Z" },
