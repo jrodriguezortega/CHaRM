@@ -1,18 +1,18 @@
-<div align="center">
+
 
 # CHaRM: Segmentation-Free Deep Learning Methodology for Accurate 3D Landmark Detection on Complex Intraoral Scans
 
-[![Journal](https://img.shields.io/badge/Expert%20Systems%20with%20Applications-2026-orange.svg)](https://www.sciencedirect.com/journal/expert-systems-with-applications)
-[![Dataset](https://img.shields.io/badge/Dataset-IOSLandmarks--1k-blue.svg)](https://zenodo.org/records/14757224)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![CI](https://github.com/jrodriguezortega/CHaRM/actions/workflows/ci.yml/badge.svg)](https://github.com/jrodriguezortega/CHaRM/actions/workflows/ci.yml)
-<a href="https://pytorch.org/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
-<a href="https://lightning.ai/"><img alt="Lightning" src="https://img.shields.io/badge/-Lightning-792ee5?logo=lightning&logoColor=white"></a>
-<a href="https://hydra.cc/"><img alt="Config: Hydra" src="https://img.shields.io/badge/Config-Hydra-89b8cd"></a>
+![Journal](https://img.shields.io/badge/Expert%20Systems%20with%20Applications-2026-orange.svg)
+![Dataset](https://img.shields.io/badge/Dataset-IOSLandmarks--1k-blue.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![CI](https://github.com/jrodriguezortega/CHaRM/actions/workflows/ci.yml/badge.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white)
+![Lightning](https://img.shields.io/badge/-Lightning-792ee5?logo=lightning&logoColor=white)
+![Config: Hydra](https://img.shields.io/badge/Config-Hydra-89b8cd)
 
 José Rodríguez-Ortega, Francisco Pérez-Hernández, Siham Tabik
 
-</div>
+
 
 ## Abstract
 
@@ -79,8 +79,7 @@ uv sync
 ```
 
 This installs the `charm` package and the development tools (pytest, ruff)
-into `.venv`. The four tools are ordinary scripts. Run them with `uv run
-python scripts/preprocess.py` (and `train.py`, `evaluate.py`, `predict.py`),
+into `.venv`. The four tools are ordinary scripts. Run them with `uv run python scripts/preprocess.py` (and `train.py`, `evaluate.py`, `predict.py`),
 or activate the environment and call `python` directly.
 
 For a machine without a GPU, install the CPU build of PyTorch instead:
@@ -109,7 +108,7 @@ remove the compiled packages.
 
 ## Dataset
 
-Download [IOSLandmarks-1k](https://zenodo.org/records/14757224) and extract
+Download [IOSLandmarks-1k](https://doi.org/10.5281/zenodo.14757223) and extract
 it to `data/IOSLandmarks-1k`:
 
 ```
@@ -284,9 +283,9 @@ the `_upper` or `_lower` suffix of the file name; pass `--arch upper` or
 `--arch lower` otherwise. For each scan it writes:
 
 - `<name>.json`, in the annotation format of IOSLandmarks-1k
-  (`labels_schema.json`);
+(`labels_schema.json`);
 - `<name>.fcsv`, a 3D Slicer markups file that can be loaded on top of the
-  mesh.
+mesh.
 
 Only landmarks of teeth predicted present are written. Inference runs on the
 first GPU when available (`--device cpu` to force the CPU). To measure the
@@ -311,6 +310,10 @@ src/charm/
 └── io.py                JSON and FCSV writers
 tests/                   CPU tests (uv run pytest)
 ```
+
+## Acknowledgements
+
+The research and the publication of this code and dataset IOSLandmarks-1k were supported by [Nemotec](https://www.nemotec.com) (Madrid, Spain).
 
 ## Citation
 
